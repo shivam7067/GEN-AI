@@ -1,0 +1,65 @@
+.home{
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    width:100%;
+    min-width: 100vh;
+    display: flex;
+  justify-content: center;
+    align-items: center;
+ background: linear-gradient(to bottom,rgb(9, 8, 8),rgb(0, 0, 16));
+    .left{
+        background-color: transparent;
+        
+    }
+    .right{
+        background-color: transparent;
+    }
+    .bottom{
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+    textarea{
+        width: 100vh;
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        height: 150px;
+        background-color: transparent;
+        color: whitesmoke;
+       border: 1px solid rgb(30, 18, 139);
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .resume{
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+        width: 100vh;
+        height: 50px;
+        text-align: center;
+        margin-top: 10px;
+        box-shadow: 0 4px 8px rgba(18, 17, 17, 0.2);
+        line-height: 50px;
+        border-radius: 10px;
+        border: 1px solid rgb(30, 18, 139);
+        
+    }
+ button{
+    background-color: transparent;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    border: 1px solid rgb(30, 18, 139);
+    padding: 10px 20px;
+    width: 50vh;
+    border-radius: 5px;
+    cursor: pointer;
+transform: scale(1 );  }
+    .interview-input.group{
+ 
+    }
+}
