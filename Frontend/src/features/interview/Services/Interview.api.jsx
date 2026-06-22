@@ -1,7 +1,7 @@
 import axios from "axios";
-
+const API_URL = import.meta.env.VITE_API_URL;
 const api = axios.create({
-    baseURL: "http://localhost:3000/api",
+    baseURL: API_URL,
     withCredentials: true,
 });
 
@@ -13,7 +13,7 @@ export const generateReport = async ({ selfDescription, jobDescription, resume }
         formData.append('jobDescription', jobDescription);
         formData.append('resume', resume);
 
-        const response = await api.post('/generate-report', formData, {
+        const response = await api.post('/api/generate-report', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -27,7 +27,7 @@ export const generateReport = async ({ selfDescription, jobDescription, resume }
 
 export const getReportById = async (interviewId) => {
     try {
-        const response = await api.get(`/interviews/${interviewId}`);
+        const response = await api.get(`/api/interviews/${interviewId}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching interview report:', error);

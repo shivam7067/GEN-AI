@@ -56,7 +56,10 @@ export const useAuth = () => {
     }
 
     fetchUser()
-  }, [ ])
+  }, [
+    setUser,
+    setLoading
+  ])
 
   return { user, loading, handleLogin, handleRegister, handleLogout ,}
 }
