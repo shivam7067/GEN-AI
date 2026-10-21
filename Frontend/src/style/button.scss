@@ -1,18 +1,93 @@
-.button{
-    border: none;
-    outline: none;
-    padding-inline: 1.5rem;
-    padding-block: 0.75rem;
-    border-radius: 1rem;
-    cursor: pointer;
-    
-    transition: all(0.4s ease-in-out);
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  outline: none;
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius-md, 12px);
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
 
-    &.primary-button{
-        background-color:#fc032c;
-        color: white;
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    filter: grayscale(30%);
+  }
+
+  /* Primary Button: Electric Emerald to Cyan Gradient with Neon Glow */
+  &.primary-button {
+    background: linear-gradient(135deg, #10b981 0%, #059669 45%, #06b6d4 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #34d399 0%, #10b981 45%, #22d3ee 100%);
+      box-shadow: 0 6px 26px rgba(16, 185, 129, 0.6), 0 0 18px rgba(52, 211, 153, 0.55);
+      transform: translateY(-2px);
     }
-    &:active{
-        transform: scale(1.1);
+  }
+
+  /* Secondary Button: Frosted Obsidian Glass with Emerald Accent */
+  &.secondary-button {
+    background: rgba(18, 28, 40, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #e2e8f0;
+    border: 1px solid rgba(52, 211, 153, 0.25);
+
+    &:hover:not(:disabled) {
+      background: rgba(24, 38, 54, 0.85);
+      border-color: rgba(110, 231, 183, 0.5);
+      color: #ffffff;
+      transform: translateY(-1px);
     }
+  }
+
+  /* Danger Button */
+  &.danger-button {
+    background: rgba(244, 63, 94, 0.12);
+    color: #fda4af;
+    border: 1px solid rgba(244, 63, 94, 0.3);
+
+    &:hover:not(:disabled) {
+      background: rgba(244, 63, 94, 0.25);
+      border-color: rgba(244, 63, 94, 0.55);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(244, 63, 94, 0.3);
+    }
+  }
+
+  /* Ghost Button */
+  &.ghost-button {
+    background: transparent;
+    color: #94a3b8;
+    border: 1px solid transparent;
+
+    &:hover:not(:disabled) {
+      color: #f8fafc;
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  /* Icon Button variant */
+  &.icon-btn {
+    padding: 0.6rem;
+    border-radius: var(--radius-sm, 8px);
+  }
 }

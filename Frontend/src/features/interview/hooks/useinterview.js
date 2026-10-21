@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import { InterviewContext } from "../Interview.context";
-import { generateReport,getReportById } from "../services/interview.api";
+import { generateReport, getReportById } from "../Services/Interview.api";
 
 export const useInterview = () => {
     const context = useContext(InterviewContext);
+    if (!context) {
+        throw new Error("useInterview must be used within an InterviewProvider");
+    }
+
     const { interviewReport, setInterviewReport, loading, setLoading } = context;
 
     const handleGenerateReport = async ({ selfDescription, jobDescription, resume }) => {
@@ -11,14 +15,9 @@ export const useInterview = () => {
         try {
             setInterviewReport(null);
             const data = await generateReport({ selfDescription, jobDescription, resume });
-            console.log("API RESPONSE =", data);
-            const report = data.interviewReport || data;
-            console.log("GENERATED REPORT =", report);
+            const report = data.report || data.interviewReport || data;
             setInterviewReport(report);
-            return report;
-        } catch (err) {
-            console.log(err);
-            throw err;
+            return data;
         } finally {
             setLoading(false);
         }
@@ -28,16 +27,14 @@ export const useInterview = () => {
         setLoading(true);
         try {
             const data = await getReportById(interviewId);
-            const report = data.interviewReport || data;
+            const report = data.report || data.interviewReport || data;
             setInterviewReport(report);
             return report;
-        } catch (err) {
-            console.log(err);
-            throw err;
         } finally {
             setLoading(false);
         }
     };
+
     return {
         interviewReport,
         setInterviewReport,
@@ -46,4 +43,4 @@ export const useInterview = () => {
         handleGenerateReport,
         handleGetReportById
     };
-}
+};

@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-
-
 const technicalQuestionsSchema = new mongoose.Schema({
     question: {
         type: String,
@@ -10,32 +8,29 @@ const technicalQuestionsSchema = new mongoose.Schema({
     intention: {
         type: String,
         required: [true, 'Intention is required']
-        },
-        answer: {
-            type: String,
-            required: [true, 'Answer is required']
-        }
-   },
-{
+    },
+    answer: {
+        type: String,
+        required: [true, 'Answer is required']
+    }
+}, {
     _id: false
 });
 
-
 const behavioralQuestionsSchema = new mongoose.Schema({
-     question: {
+    question: {
         type: String,
         required: [true, 'Question is required']
     },
     intention: {
         type: String,
         required: [true, 'Intention is required']
-        },
-        answer: {
-            type: String,
-            required: [true, 'Answer is required']
-        }
-   },
-{
+    },
+    answer: {
+        type: String,
+        required: [true, 'Answer is required']
+    }
+}, {
     _id: false
 });
 
@@ -45,74 +40,75 @@ const skillGapSchema = new mongoose.Schema({
         required: [true, 'Skill is required']
     },
     severity: {
-       type: String,
-       enum: ['Low', 'Medium', 'High'],
-       required: [true, 'Severity is required']
+        type: String,
+        default: 'Medium'
     }
-
-},
-{
+}, {
     _id: false
 });
 
 const preparationPlanSchema = new mongoose.Schema({
-    day:{
-        type:Number,
+    day: {
+        type: Number,
         required: [true, 'Day is required']
     },
-    focus:{
+    focus: {
         type: String,
         required: [true, 'Focus is required']
     },
-    task:[{
-        type: String,
-        required: [true, 'Task is required']
-        
+    tasks: [{
+        type: String
+    }],
+    task: [{
+        type: String
     }]
-})
+}, {
+    _id: false
+});
 
 const interviewReportSchema = new mongoose.Schema({
-
-   
-
     jobDescription: {
         type: String,
         required: true
     },
-    resume:{
+    resume: {
         type: String,
+        default: ''
     },
     selfDescription: {
         type: String,
+        default: ''
+    },
+    candidateName: {
+        type: String,
+        default: 'Candidate'
+    },
+    summary: {
+        type: String,
+        default: ''
     },
     matchScore: {
         type: Number,
         min: 0,
-        max: 100
+        max: 100,
+        default: 0
     },
-   user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-   },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     technicalQuestions: [technicalQuestionsSchema],
     behavioralQuestions: [behavioralQuestionsSchema],
-    skillGaps:[skillGapSchema],
-    preparationPlan:[preparationPlanSchema]
-})
-
-
-
-mongoose.model('InterviewReport', interviewReportSchema);
-mongoose.model('TechnicalQuestion', technicalQuestionsSchema);
-mongoose.model('BehavioralQuestion', behavioralQuestionsSchema);
-mongoose.model('SkillGap', skillGapSchema);
-mongoose.model('PreparationPlan', preparationPlanSchema);
+    skillGaps: [skillGapSchema],
+    preparationPlan: [preparationPlanSchema]
+}, {
+    timestamps: true
+});
 
 module.exports = {
-    InterviewReportModel: mongoose.model('InterviewReport'),
-    TechnicalQuestionModel: mongoose.model('TechnicalQuestion'),
-    BehavioralQuestionModel: mongoose.model('BehavioralQuestion'),
-    SkillGapModel: mongoose.model('SkillGap'),
-    PreparationPlanModel: mongoose.model('PreparationPlan')
-}
-
+    InterviewReportModel: mongoose.models.InterviewReport || mongoose.model('InterviewReport', interviewReportSchema),
+    TechnicalQuestionModel: mongoose.models.TechnicalQuestion || mongoose.model('TechnicalQuestion', technicalQuestionsSchema),
+    BehavioralQuestionModel: mongoose.models.BehavioralQuestion || mongoose.model('BehavioralQuestion', behavioralQuestionsSchema),
+    SkillGapModel: mongoose.models.SkillGap || mongoose.model('SkillGap', skillGapSchema),
+    PreparationPlanModel: mongoose.models.PreparationPlan || mongoose.model('PreparationPlan', preparationPlanSchema)
+};

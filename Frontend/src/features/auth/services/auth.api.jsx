@@ -1,55 +1,35 @@
 import axios from "axios";
-const API_URL = import.meta.env.VITE_API_URL;
-const api=axios.create({
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+const api = axios.create({
     baseURL: API_URL,
-    withCredentials:true
-})
+    withCredentials: true
+});
 
-export const register =  async ({username ,email,password})=>{
-try{
-    const response= await api.post('/api/register',{
-    username,email,password
-},{
- withCredentials:true
-})
-return response.data
-}catch(err){
-console.log(err);
-}
-}
+export const register = async ({ username, email, password }) => {
+    const response = await api.post('/api/register', {
+        username,
+        email,
+        password
+    });
+    return response.data;
+};
 
-export const login =  async ({email,password})=>{
-try{
-    const response= await api.post('/api/login',{
-    email,password
-},{
- withCredentials:true
-})
-return response.data
-}catch(err){
-console.log(err);
-}
-}
+export const login = async ({ email, password }) => {
+    const response = await api.post('/api/login', {
+        email,
+        password
+    });
+    return response.data;
+};
 
 export async function logout() {
-   try{
-    const response= await api.get('/api/logout', {
-      withCredentials: true
-    })
-return response.data
-}catch(err){
-console.log(err);
-}
-
+    const response = await api.get('/api/logout');
+    return response.data;
 }
 
 export async function getme() {
-   try{
-    const response= await api.get('/api/get-me', {
-      withCredentials: true
-    })
-return response.data
-}catch(err){
-console.log(err);
-}
+    const response = await api.get('/api/get-me');
+    return response.data;
 }
